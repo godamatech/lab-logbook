@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from os import name as os_name
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,19 +28,27 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+TAILWIND_APP_NAME = "theme"
+
 AUTH_USER_MODEL = "account.user"
 
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd" if os_name == "nt" else "/usr/bin/npm"
 
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3rd apps
+    "tailwind",
+    "theme",
     # my apps
+    "record.apps.RecordConfig",
     "account.apps.AccountConfig",
     "landing.apps.LandingConfig",
 ]

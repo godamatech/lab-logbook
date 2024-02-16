@@ -1,0 +1,42 @@
+{% extends 'record.html' %}
+
+{% block body %}
+  <section class="w-full h-full flex p-6">
+    <div class="basis-40 h-full p-8 grow flex flex-col gap-4 items-start overflow-auto">
+      <h2 class="text-2xl capitalize font-bold">hello<span class="font-thin">, muhammad</span></h2>
+      <p class="text-xs font-thin w-5/6">Nice to have you back, what an exciting day, get ready and continue your lessons</p>
+      <div class="w-full flex flex-col items-start gap-4">
+        <span class="font-bold text-lg capitalize">today's records</span>
+        <div class="w-full flex flex-col gap-2">
+          <div class="w-full bg-slate-200 rounded-xl p-4 transition-all hover:scale-105 cursor-pointer flex flex-col gap-2">
+            <div class="w-full flex items-center justify-between text-xs">
+              <label style="font-variant: small-caps;" class="text-blue-400">day</label>
+              <output class="capitalize">tuesday</output>
+            </div>
+            <div class="w-full flex items-center justify-between text-xs">
+              <label style="font-variant: small-caps;" class="text-blue-400">time</label>
+              <output class="capitalize">12:00PM</output>
+            </div>
+            <p class="text-xs text-slate-700">
+              {% lorem 20 w %}
+            </p>
+          </div>
+          <div class="w-full bg-slate-200 rounded-xl p-4 transition-all hover:scale-105 cursor-pointer flex flex-col gap-2">
+            <div class="w-full flex items-center justify-between text-xs">
+              <label style="font-variant: small-caps;" class="text-blue-400">day</label>
+              <output class="capitalize">tuesday</output>
+            </div>
+            <div class="w-full flex items-center justify-between text-xs">
+              <label style="font-variant: small-caps;" class="text-blue-400">time</label>
+              <output class="capitalize">12:00PM</output>
+            </div>
+            <p class="text-xs text-slate-700">
+              {% lorem 20 w %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="basis-80 grow-[3] p-6 rounded-xl bg-slate-200 h-full"></div>
+  </section>
+{% endblock %}
