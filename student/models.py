@@ -10,7 +10,7 @@ class Record(models.Model):
     user = models.ForeignKey(User, models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(null=True, default=None)
+    
 
     def __str__(self) -> str:
         return self.title.title()
