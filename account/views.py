@@ -1,5 +1,6 @@
 from . import forms
 from django.contrib import auth, messages
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 
 
@@ -28,12 +29,19 @@ def login_view(request):
 
 def register_view(request):
     if request.method == "POST":
+        role = request.POST.get("role")
         form = forms.RegisterForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            user = form.save()
+
+            if role:
+                group, _ = Group.objects.get_or_create(name=role)
+                user.groups.add(group)
+
             return redirect("account:login-view")
+
         for key, value in form.errors.items():
-            messages.error(request, f"{key}: value")
+            messages.error(request, f"{key}: {value}")
             return redirect("account:register-view")
     return render(request, "account/register.html")

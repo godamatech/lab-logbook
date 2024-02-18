@@ -1,4 +1,4 @@
-{% load static tailwind_tags %}
+{% load static heroicons tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body class="w-screen h-screen flex overflow-hidden p-8 from-blue-600 to-purple-700 bg-gradient-to-br">
-    <aside class="w-20 h-full flex flex-col items-center gap-4"></aside>
+    <aside class="w-20 h-full flex flex-col items-center gap-4">
+      <a href="{% url 'student:index-view' %}" style="font-variant: small-caps;" class="text-xs font-black"><span class="font-black italic text-blue-400 font-serif text-lg" style="font-variant: normal;">L</span>log</a>
+    </aside>
     <main class="grow overflow-auto overflow-x-hidden rounded-xl bg-white">
       {% block body %}
+
       {% endblock %}
     </main>
 

@@ -45,12 +45,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # 3rd apps
+    "heroicons",
     "tailwind",
     "theme",
     # my apps
-    "record.apps.RecordConfig",
     "account.apps.AccountConfig",
     "landing.apps.LandingConfig",
+    "student.apps.StudentConfig",
+    "teacher.apps.TeacherConfig",
 ]
 
 MIDDLEWARE = [
