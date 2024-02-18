@@ -2,43 +2,54 @@
 
 {% block body %}
   <section class="w-full h-full flex p-6">
-    <div class="basis-40 h-full p-8 grow flex flex-col gap-4 items-start overflow-auto">
+    <div class="basis-36 h-full p-8 grow flex flex-col gap-4 items-start overflow-auto">
       <h2 class="text-2xl capitalize font-bold">hello<span class="font-thin">, muhammad</span></h2>
       <p class="text-xs font-thin w-5/6">Nice to have you back, what an exciting day, get ready and continue your lessons</p>
-      <div class="w-full flex flex-col items-start gap-4">
-        <span class="font-bold text-lg capitalize">today's record</span>
-        <div class="w-full flex flex-col gap-2">
-          <div class="w-full bg-slate-200 rounded-xl p-4 transition-all hover:scale-105 cursor-pointer flex flex-col gap-2">
+      {% if current %}
+        <div class="w-full flex flex-col items-start gap-4">
+          <span class="font-bold text-lg capitalize">today's record</span>
+          <div class="w-full flex flex-col gap-2">
+            <div class="w-full bg-slate-200 rounded-xl p-4 transition-all hover:scale-105 cursor-pointer flex flex-col gap-2">
+              <div class="w-full flex items-center justify-between text-xs">
+                <label style="font-variant: small-caps;" class="text-blue-400">day</label>
+                <output class="capitalize">{{ current.created_at|date:'D' }}</output>
+              </div>
+              <div class="w-full flex items-center justify-between text-xs">
+                <label style="font-variant: small-caps;" class="text-blue-400">time</label>
+                <output class="capitalize">{{ current.created_at|date:'P' }}</output>
+              </div>
+              <p class="text-xs text-slate-700">{{ current.description }}</p>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="basis-80 grow-[3] p-6 px-2 rounded-xl bg-slate-200 h-full gap-8 overflow-auto">
+      <div class="w-full flex flex-wrap gap-4 text-slate-700">
+        <div class="grow basis-60 p-4 rounded shadow bg-white flex items-center gap-4">
+          <b class="w-8 aspect-1 flex-none rounded-full text-white flex items-center justify-center text-xs bg-blue-500">{{ total.count }}</b>
+          <span class="capitalize">total records</span>
+        </div>
+        <div class="grow basis-60 p-4 rounded shadow bg-white flex items-center gap-4">
+          <b class="w-8 aspect-1 flex-none rounded-full text-white flex items-center justify-center text-xs bg-green-500">100</b>
+          <span class="capitalize">average records</span>
+        </div>
+      </div>
+      <div class="w-full flex flex-wrap items-center justify-evenly gap-3 max-h-full my-5">
+        {% for record in others %}
+          <div class="basis-60 bg-white rounded-xl p-4 transition-all hover:scale-105 cursor-pointer flex flex-col gap-2">
             <div class="w-full flex items-center justify-between text-xs">
               <label style="font-variant: small-caps;" class="text-blue-400">day</label>
-              <output class="capitalize">tuesday</output>
+              <output class="capitalize">{{ record.created_at }}</output>
             </div>
             <div class="w-full flex items-center justify-between text-xs">
               <label style="font-variant: small-caps;" class="text-blue-400">time</label>
               <output class="capitalize">12:00PM</output>
             </div>
-            <p class="text-xs text-slate-700">
-              {% lorem 20 w %}
-            </p>
+            <p class="text-xs text-slate-700">{{ record.description }}</p>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="basis-80 grow-[3] p-6 rounded-xl bg-slate-200 h-full">
-      <div class="w-full flex flex-wrap gap-4 text-slate-700">
-        <div class="grow basis-60 p-4 rounded shadow bg-white flex items-center gap-4">
-          <b class="w-8 aspect-1 flex-none rounded-full text-white flex items-center justify-center text-xs bg-red-500">100</b>
-          <span class="capitalize">total rejected</span>
-        </div>
-        <div class="grow basis-60 p-4 rounded shadow bg-white flex items-center gap-4">
-          <b class="w-8 aspect-1 flex-none rounded-full text-white flex items-center justify-center text-xs bg-blue-500">100</b>
-          <span class="capitalize">total approved</span>
-        </div>
-        <div class="grow basis-60 p-4 rounded shadow bg-white flex items-center gap-4">
-          <b class="w-8 aspect-1 flex-none rounded-full text-white flex items-center justify-center text-xs bg-green-500">100</b>
-          <span class="capitalize">total pending</span>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>

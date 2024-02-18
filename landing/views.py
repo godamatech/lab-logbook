@@ -1,7 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def index_view(request):
+    user = request.user
+    if user.is_authenticated:
+        if user.is_superuser:
+            return redirect("/admin")
+        elif user.groups.filter(name="student").exists():
+            return redirect("student:index-view")
+        elif user.groups.filter(name="teacher").exists():
+            return redirect("teacher:index-view")
     return render(request, "landing/index.html")
 
 
