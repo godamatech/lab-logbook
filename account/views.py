@@ -41,6 +41,7 @@ def register_view(request):
 
             return redirect("account:login-view")
 
+        request.session['form_data'] = form.data
         for key, value in form.errors.items():
             messages.error(request, f"{key}: {value}")
             return redirect("account:register-view")

@@ -3,7 +3,7 @@
 {% block body %}
   <section class="w-full h-full flex p-6">
     <div class="basis-36 h-full p-8 grow flex flex-col gap-4 items-start overflow-auto">
-      <h2 class="text-2xl capitalize font-bold">hello<span class="font-thin">, muhammad</span></h2>
+      <h2 class="text-2xl capitalize font-bold">hello<span class="font-thin">, {{user.first_name|title}}</span></h2>
       <p class="text-xs font-thin w-5/6">Nice to have you back, what an exciting day, get ready and continue your lessons</p>
       {% if current %}
         <div class="w-full flex flex-col items-start gap-4">
@@ -41,11 +41,15 @@
           <div class="basis-60 bg-white rounded-xl p-4 transition-all hover:scale-105 cursor-pointer flex flex-col gap-2">
             <div class="w-full flex items-center justify-between text-xs">
               <label style="font-variant: small-caps;" class="text-blue-400">day</label>
-              <output class="capitalize">{{ record.created_at }}</output>
+                <output class="capitalize">{{ current.created_at|date:'D' }}</output>
             </div>
             <div class="w-full flex items-center justify-between text-xs">
               <label style="font-variant: small-caps;" class="text-blue-400">time</label>
-              <output class="capitalize">12:00PM</output>
+                <output class="capitalize">{{ current.created_at|date:'P' }}</output>
+            </div>
+            <div class="w-full flex items-center justify-between text-xs">
+              <label style="font-variant: small-caps;" class="text-blue-400">score</label>
+              <output class="capitalize">{{record.score|default:"--"}}</output>
             </div>
             <p class="text-xs text-slate-700">{{ record.description }}</p>
           </div>

@@ -8,7 +8,7 @@ def index_view(request):
             return redirect("/admin")
         elif user.groups.filter(name="student").exists():
             return redirect("student:index-view")
-        elif user.groups.filter(name="teacher").exists():
+        elif user.groups.filter(name="staff").exists():
             return redirect("teacher:index-view")
     return render(request, "landing/index.html")
 

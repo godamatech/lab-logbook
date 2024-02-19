@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     "account.apps.AccountConfig",
     "landing.apps.LandingConfig",
     "student.apps.StudentConfig",
-    "teacher.apps.TeacherConfig",
+    "staff.apps.StaffConfig",
 ]
 
 MIDDLEWARE = [
@@ -143,3 +143,12 @@ STATIC_ROOT = BASE_DIR / "static"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+JAZZMIN_SETTINGS = {
+    "usermenu_links": [
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"model": "auth.user"},
+
+        {"name": "Logout", "url":"/logout"}
+    ],
+}
