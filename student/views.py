@@ -8,9 +8,11 @@ def index_view(request):
     total = models.Record.objects.filter(user=request.user)
 
     others = total.exclude(created_at__date=now().date())
-    current = total.filter(user=request.user, created_at__date=now().date()).first()
+    current = total.filter(user=request.user, created_at__date=now().date())
 
-    context = {"current": current, "others": others, "total": total}
+    notifications = models.Notification.objects.filter(user=request.user)
+
+    context = {"current": current, "others": others, "total": total, "notifications": notifications}
     return render(request, "student/index.html", context)
 
 
@@ -27,6 +29,7 @@ def create_view(request):
             instance.user = request.user
             instance.save()
 
+            messages.success(request, "Log Added Successfully!")
             return redirect("student:index-view")
 
         messages.error(request, "Failed to save record")
@@ -44,8 +47,7 @@ def create_viewOld(request):
 
             instance.user = request.user
             instance.save()
-
-            messages.success(request, "Log Added Successfully!")
+            
             return redirect("student:index-view")
 
         messages.error(request, "Failed to save record")
