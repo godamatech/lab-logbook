@@ -14,7 +14,29 @@ def index_view(request):
     return render(request, "student/index.html", context)
 
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from . import forms
+
 def create_view(request):
+    if request.method == "POST":
+        form = forms.RecordForm(request.POST, request.FILES)  # Include request.FILES to handle file uploads
+        if form.is_valid():
+            instance = form.save(commit=False)  # Don't save the form yet
+
+            instance.user = request.user
+            instance.save()
+
+            return redirect("student:index-view")
+
+        messages.error(request, "Failed to save record")
+        return redirect("student:create-view")
+    else:
+        form = forms.RecordForm()  # If the request method is not POST, create a new form instance
+    return render(request, "student/create.html", {"form": form})
+
+
+def create_viewOld(request):
     if request.method == "POST":
         form = forms.RecordForm(request.POST)
         if form.is_valid():
@@ -23,6 +45,7 @@ def create_view(request):
             instance.user = request.user
             instance.save()
 
+            messages.success(request, "Log Added Successfully!")
             return redirect("student:index-view")
 
         messages.error(request, "Failed to save record")
