@@ -5,37 +5,22 @@
   <head>
     {% tailwind_css %}
     <meta charset="UTF-8" />
-    <title>Lab. Logbook | Staff</title>
+    <title>Document</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="w-screen h-screen flex overflow-hidden from-blue-600 to-purple-700 bg-gradient-to-br">
-    <aside class="w-40 flex-none h-full flex flex-col py-6 pl-2 gap-4">
-      <a href="{% url 'student:index-view' %}" style="font-variant: small-caps;" class="text-xs font-black"><span class="font-black italic text-blue-400 font-serif text-lg" style="font-variant: normal;">L</span>log</a>
-      <nav class="grow flex flex-col font-semibold lowercase text-sm" style="font-variant: small-caps;">
-        <a href="" class="w-full p-1 px-2 text-white transition-all hover:text-blue-500 hover:bg-white">dashboard</a>
-      </nav>
-      <a href="{% url 'account:logout-view' %}" class="w-full p-1 px-2 text-white font-black transition-all hover:text-white hover:bg-black rounded-l-full pl-4" style="font-variant: small-caps;">log out</a>
+  <body class="w-screen h-screen flex bg-slate-100">
+    <aside class="flex-none h-full w-14 bg-white py-20 flex flex-col items-center justify-between gap-4">
+      <a href="" class=""></a>
+      <nav class="grow flex flex-col items-center justify-start gap-2 w-full"></nav>
+      <a href="" class=""></a>
     </aside>
-    <main class="grow overflow-auto overflow-x-hidden bg-white p-8">
-      {% block body %}
+    <main class="h-full w-full overflow-x-hidden overflow-y-auto grow flex flex-col bg-gradient-to-r from-transparent from-70% to-blue-200 to-30%">
+      <header class="w-full flex flex-none h-10"></header>
+      <div class="grow max-h-full p-8 flex flex-col gap-4 w-full">
+        {% block body %}
 
-      {% endblock %}
+        {% endblock %}
+      </div>
     </main>
-
-    {% if messages %}
-      <section class="inset-0 fixed top-0 p-6 left-0 z-50 w-full h-full pointer-events-none flex flex-col items-start justify-end gap-2">
-        {% for msg in messages %}
-          <div class="w-96 p-2 bg-gray-300 shadow-md text-xs pop-up-messages pointer-events-auto cursor-pointer">
-            <span class="leading-3">{{ msg }}</span>
-          </div>
-        {% endfor %}
-      </section>
-    {% endif %}
   </body>
-  <script>
-    querySelectorAll('.pop-up-messages').forEach((message, id) => {
-      message.onclick = message.remove
-      setTimeout(message && message.remove, 2000 + 500 * id)
-    })
-  </script>
 </html>

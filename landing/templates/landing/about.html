@@ -2,14 +2,13 @@
 {% load static %}
 
 {% block body %}
-<div class="flex h-screen items-center justify-center bg-blue-500">
-  <div class="w-full rounded-md bg-white mb-6 p-8 sm:w-1/2">
-    <div class="bg-white p-8 rounded-md w-full sm:w-1/2">
-        <h1 class="text-2xl font-bold mb-4 text-gray-800">Important notes for students</h1>
-        <p class="m-5 p-1">The purpose of this logbook is for the students to record his/her activities/tasks undertaken during practical classes in the laboratory.</p>
-        <p class="m-5 p-1">Students must complete relevant entry of the logbook at the end of every practical class before leaving the laboratory.</p>
-        <p class="m-5 p-1">Logbook must be endosed by staff.</p>
-    </div>
-  </div>
-</div>
+  <section class="w-full h-80 mb-20 flex items-center justify-center bg-slate-600 text-white font-bold text-center text-6xl">
+    <h1 class="capitalize">about us</h1>
+  </section>
+
+  <section class="w-full grid grid-cols-[repeat(auto-fit,minmax(24rem,1fr))] gap-4 px-[5%]">
+    <p class="text-center">The purpose of this logbook is for the students to record his/her activities/tasks undertaken during practical classes in the laboratory.</p>
+    <p class="text-center">Students must complete relevant entry of the logbook at the end of every practical class before leaving the laboratory.</p>
+    <p class="text-center">Logbook must be endosed by staff.</p>
+  </section>
 {% endblock %}
