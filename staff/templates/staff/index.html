@@ -2,53 +2,47 @@
 {% load heroicons %}
 
 {% block body %}
-  {% with count='123456' %}
-    <section class="w-full py-8 pl-8 flex flex-col gap-3 items-start max-w-full">
-      <h2 class="text-bold text-2xl">Today's records</h2>
-      <div class="w-full flex gap-4 items-center justify-start overflow-auto snap-x snap-mandatory p-4">
-        {% for _ in count %}
-          <div class="basis-96 flex-none p-4 flex flex-col items-start gap-2 shadow-md snap-start aspect-[2.5] bg-white bg-opacity-60 backdrop-blur-md rounded">
-            <h2 class="text-semibold italic capitalize text-sm">Lorem ipsum dolor sit amet consectetur.</h2>
-            <p class="text-xs test-slate-700 line-clamp-5">
-              {% lorem 30 w %}
-            </p>
+  <section class="w-full py-8 pl-8 flex flex-col gap-3 items-start max-w-full">
+    <h2 class="text-bold text-2xl">Student's records</h2>
+    <div class="w-full flex gap-4 items-center justify-start overflow-auto snap-x snap-mandatory p-4">
+      {% for record in records %}
+        <div class="basis-96 flex-none p-4 flex flex-col items-start gap-2 shadow-md snap-start aspect-[2.5] bg-white bg-opacity-60 backdrop-blur-md rounded">
+          <h2 class="text-semibold italic capitalize text-sm">{{ record.title }}</h2>
+          <p class="text-xs test-slate-700 line-clamp-5">{{ record.description }}</p>
 
-            <div class="mt-auto flex items-center justify-between gap-2 w-full">
-              <div class="w-8 aspect-1 flex-none rounded-full bg-black"></div>
-              <span class="text-xs text-slate-600 lowercase" style="font-variant: small-caps;">mminuwaali</span>
-              <div class="ml-auto flex flex-col items-end text-xs text-gray-700">
-                <span>Date: 12 Jan, 3030</span>
-                <span>Time: 12:00pm</span>
-              </div>
+          <div class="mt-auto flex items-center justify-between gap-2 w-full">
+            <div class="w-8 aspect-1 flex-none rounded-full bg-black"></div>
+            <span class="text-xs text-slate-600 lowercase" style="font-variant: small-caps;">{{ record.user.username }}</span>
+            <div class="ml-auto flex flex-col items-end text-xs text-gray-700">
+              <span>Date: {{ record.created_at|date:'d M, Y' }}</span>
+              <span>Time: {{ record.created_at|date:'h:i A' }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="w-full flex gap-4 flex-wrap items-start">
+    <div class="basis-96 grow-[3] w-full px-8 flex flex-col gap-3 items-start">
+      <h2 class="text-bold text-2xl">Students</h2>
+      <div class="w-full grid gap-4 grid-cols-[repeat(auto-fill,minmax(24rem,1fr))]">
+        {% for student in students %}
+          <div class="w-full flex rounded-md gap-4 p-4 relative border-l-4 {% cycle 'border-l-blue-600' 'border-l-pink-600' 'border-l-purple-600' %} bg-white">
+            <div class="h-12 aspect-1 flex-none rounded-xl bg-black relative my-auto"></div>
+
+            <div class="flex flex-col items-start leading-3 text-slate-500 grow">
+              <h3 class="text-md capitalize">{{ student.get_full_name }}</h3>
+              <h3 class="text-sm lowercase">{{ student.email }}</h3>
+              <h3 class="text-sm lowercase">{{ student.username }}</h3>
+            </div>
+
+            <div class="flex items-center justify-center gap-2">
+              <a href="#" class="text-sm text-slate-600 transition-all hover:text-black">{% heroicon_outline 'eye' %}</a>
             </div>
           </div>
         {% endfor %}
       </div>
-    </section>
-
-    <section class="w-full flex gap-4 flex-wrap items-start">
-      <div class="basis-96 grow-[3] w-full px-8 flex flex-col gap-3 items-start">
-        <h2 class="text-bold text-2xl">Students</h2>
-        <div class="w-full flex flex-col gap-4">
-          {% for _ in count %}
-            <div class="w-full flex gap-4 p-4 relative border-l-4 {% cycle 'border-l-blue-600' 'border-l-pink-600' 'border-l-purple-600' %} bg-white">
-              <div class="h-12 aspect-1 flex-none rounded-xl bg-black relative my-auto"></div>
-
-              <div class="flex flex-col items-start leading-3 text-slate-500 grow">
-                <h3 class="text-md capitalize">muhammad muhammad inuwa</h3>
-                <h3 class="text-sm lowercase">mminuwaali@gmail.com</h3>
-                <h3 class="text-sm lowercase">mminuwaali</h3>
-              </div>
-
-              <div class="flex items-center justify-center gap-2">
-                <a href="#" class="text-sm text-slate-600 transition-all hover:text-black">{% heroicon_outline 'eye' %}</a>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-
-      <div class="basis-60 grow p-6 bg-white"></div>
-    </section>
-  {% endwith %}
+    </div>
+  </section>
 {% endblock %}
