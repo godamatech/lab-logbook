@@ -6,7 +6,7 @@
     <h2 class="text-bold text-2xl">Student's records</h2>
     <div class="w-full flex gap-4 items-center justify-start overflow-auto snap-x snap-mandatory p-4">
       {% for record in records %}
-        <div class="basis-96 flex-none p-4 flex flex-col items-start gap-2 shadow-md snap-start aspect-[2.5] bg-white bg-opacity-60 backdrop-blur-md rounded">
+        <a href="{% url 'staff:detail' record.id %}" class="basis-96 flex-none p-4 flex flex-col items-start gap-2 shadow-md snap-start aspect-[2.5] bg-white bg-opacity-60 backdrop-blur-md rounded">
           <h2 class="text-semibold italic capitalize text-sm">{{ record.title }}</h2>
           <p class="text-xs test-slate-700 line-clamp-5">{{ record.description }}</p>
 
@@ -18,7 +18,7 @@
               <span>Time: {{ record.created_at|date:'h:i A' }}</span>
             </div>
           </div>
-        </div>
+        </a>
       {% endfor %}
     </div>
   </section>
@@ -38,7 +38,7 @@
             </div>
 
             <div class="flex items-center justify-center gap-2">
-              <a href="#" class="text-sm text-slate-600 transition-all hover:text-black">{% heroicon_outline 'eye' %}</a>
+              <a href="{% url 'staff:student' student.id %}" class="text-sm text-slate-600 transition-all hover:text-black">{% heroicon_outline 'eye' %}</a>
             </div>
           </div>
         {% endfor %}

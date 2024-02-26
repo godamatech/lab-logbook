@@ -1,6 +1,6 @@
 from . import models
-from student.models import Record
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from student.models import Record, Notification
 
 
 def index_view(request):
@@ -12,4 +12,29 @@ def index_view(request):
 
 
 def detail_view(request, id):
-    return render(request, "staff/detail.html")
+    record = Record.objects.get(id=id)
+
+    if request.method == "POST":
+        score = request.POST.get("score")
+        remark = request.POST.get("remark")
+
+        record.remark = remark
+        record.score = float(score)
+        record.save()
+
+        Notification.objects.create(
+            user=record.user,
+            description=f"Lecturer {request.user.username} have assess your record: '{record.title}' and gave a remark and score",
+        )
+        return redirect("staff:detail", id=id)
+
+    context = {"record": record}
+    return render(request, "staff/detail.html", context)
+
+
+def student_view(request, id):
+    student = models.User.objects.get(id=id)
+    records = Record.objects.filter(user=student)
+
+    context = {"student": student, "records": records}
+    return render(request, "staff/student.html", context)
